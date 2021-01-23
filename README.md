@@ -5,7 +5,7 @@ This is a service to publish temperature type data onto the DBus ov VenusOs runn
 on a Victron GX device.
 
 I develop on a Raspberry Pie 3B+, this service was last tested on VenusOS 2.60 in November 2020.
-I use these service on my NArrowboat Lady's Smock, I am based in the UK.
+I use these service on my Narrowboat Lady's Smock, I am based in the UK.
 
 IF all goes well with the install when youstart up your GX device the service will start.
 The data is published with a type of "Temperature" and will be available:
