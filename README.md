@@ -30,7 +30,7 @@ INSTRUCTIONS
 4) Set execute on the following files (Sadly storing things on github does not preserve execute bits)  
    dbus-i2c/i2c.py  
    dbus-i2c/start-i2c.sh  
-   dbus-i2c/check-i2c.sh - this is just a simple file you can use to check if the service is running
+   dbus-i2c/check-i2c.sh - this is just a simple file you can use to check if the service is running  
    dbus-i2c/service/run  
    /service/dbus-i2c
   
