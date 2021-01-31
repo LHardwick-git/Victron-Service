@@ -20,19 +20,22 @@ The data is published with a type of "Temperature" and will be available:
  
 INSTRUCTIONS
 1) Download the GitHub repo, probably by hitting the green  (V Code) button on GITHub
-2) Copy the dbus-i2c directory onto the VenusOS filessystem as /opt/victronenergy/dbus-i2c
+
+2) Copy the dbus-i2c directory onto the VenusOS filessystem as /opt/victronenergy/dbus-i2c  
    cp -r <your location>/dbus-i2c /opt/victronenergy/dbus-i2c
-3) create a symlink from /service/dbus-i2c to /opt/victronenergy/dbus-i2c/service
+  
+3) create a symlink from /service/dbus-i2c to /opt/victronenergy/dbus-i2c/service  
    ln -s /opt/victronenergy/dbus-i2c/service /service/dbus-i2c
+   
 4) Set execute on the following files (Sadly storing things on github does not preserve execute bits)
-   dbus-i2c/i2c.py
-   dbus-i2c/start-i2c.sh
+   dbus-i2c/i2c.py  
+   dbus-i2c/start-i2c.sh  
    dbus-i2c/check-i2c.sh - this is just a simple file you can use to check if the service is running
-   dbus-i2c/service/run
+   dbus-i2c/service/run  
    /service/dbus-i2c
   
-  The command is
-  chmod a+x <filename>
+   The command is  
+   chmod a+x <filename>
   
 There is a good chance the service will start, if not reboot your VenusOS device
 You can check in the file /var/log/dbus-i2c to see what is happening as the service starts up
