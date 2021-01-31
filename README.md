@@ -40,17 +40,19 @@ INSTRUCTIONS
 There is a good chance the service will start, if not reboot your VenusOS device
 You can check in the file /var/log/dbus-i2c to see what is happening as the service starts up
 
-NOTES
-Why is it call dbus-i2c ?    = Well it started as a service to add i2c devices 
-    - you will see I have left the code in just commented it out.
-What's the adc stuff?        = Victron GX devices only use 5 of the 8 analogue interfaces available
+NOTES  
+Why is it call dbus-i2c ?    = Well it started as a service to add i2c devices   
+    - you will see I have left the code in just commented it out.  
+    
+What's the adc stuff?        = Victron GX devices only use 5 of the 8 analogue interfaces available  
     - again this is commented out, if you add an 8 channel adc device to a Raspberry pi you can use 
       the extra 3 channels as additional temperature inputs (the VenusOS code will read it's usual 5 inputs)
       In fact there is no conflict as the Venus OS and the service would both quite happily read the 
-      same inputs - but you would end up with the same inputs twice in the User Interface.     
-I added some code recently to enable all the setting of names and temperature offsets as this is supported in
-VenusOS 2.60
-There is some other useful stuff (Which answers other questiosn I have seen on the Victron comunity)
+      same inputs - but you would end up with the same inputs twice in the User Interface.   
+      
+I added some code recently to enable all the setting of names and temperature offsets as this is supported in VenusOS 2.60.  
+
+There is some other useful stuff (Which answers other questions I have seen on the Victron comunity)
 Such as how to have one service publish multiple types of data to the DBus from one file.
       
 Hope this all works for you
