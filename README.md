@@ -2,6 +2,11 @@
 Temperature and Humidity d-bus services for Victron GX  
 Oh! and also now reading the Raspberry Pi CPU temperature which is why I was asked to post this !
 
+Now with added 1 wire support contributed by Albertbm however read the community
+Notes here regarding setting up 1-wire
+https://community.victronenergy.com/questions/58792/raspberry-pi-3b-heat-temperature.html
+(Look for post from olafd  Feb  11  2022)
+
 This is a service to publish temperature type data onto the DBus of VenusOs running on a Victron GX device.  
 Note: Currently this will not display the CPU temperature on Venus GX, only on RPi.
 
@@ -24,8 +29,12 @@ INSTRUCTIONS
 2) Copy the dbus-i2c directory onto the VenusOS filessystem as /opt/victronenergy/dbus-i2c  
    cp -r <your location>/dbus-i2c /opt/victronenergy/dbus-i2c
   
-3) create a symlink from /service/dbus-i2c to /opt/victronenergy/dbus-i2c/service  
-   ln -s /opt/victronenergy/dbus-i2c/service /service/dbus-i2c
+3) ## create a symlink from /service/dbus-i2c to /opt/victronenergy/dbus-i2c/service  
+   ## ln -s /opt/victronenergy/dbus-i2c/service /service/dbus-i2c
+  For Venus OS 2.8 (using Python 3), this now needs to be. 
+  
+  mkdir /opt/victronenergy/service/dbus-i2c
+  cp -r /opt/victronenergy/dbus-i2c/service/* /opt/victronenergy/service/dbus-i2c/
    
 4) Set execute on the following files (Sadly storing things on github does not preserve execute bits)  
    dbus-i2c/i2c.py  
@@ -37,8 +46,32 @@ INSTRUCTIONS
    The command is  
    chmod a+x <filename>
   
+   So do this for each of the files listed above.
+  
 There is a good chance the service will start, if not reboot your VenusOS device
 You can check in the file /var/log/dbus-i2c to see what is happening as the service starts up
+  
+5) Go through the file dbus-12c.py and comment out (or uncomment) the setting and  creation of each service.
+  (OK this could be a single config in a future release of the services to run now as we have so many.)
+  
+  For now look here and only enable the services you want.
+
+# So the only service left running is the Raspberry pi CPU temperature.
+#
+#    update_i2c()
+#    update_adc()
+    update_rpi()
+#    update_W1()
+    return True
+  
+  ALSO below this line:
+# I have commented out the bits that will make new services for i2C and ADC services here
+# If you want to re-enable these you need to uncomment the right lines
+  
+  Look for and comment out the 1-wire (unless you have one)
+# dbusservice['W1-temp']     = new_service(base, 'temperature', 'Wire',      '1Wire',  0, 28, 5)
+  and here
+# dbusservice['W1-temp']   ['/ProductName']     = '1Wire Sensor'
 
 NOTES  
 Why is it call dbus-i2c ?    = Well it started as a service to add i2c devices   
