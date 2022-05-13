@@ -11,8 +11,12 @@
 # to stop and restart the service 
 
 from dbus.mainloop.glib import DBusGMainLoop
-import gobject
-from gobject import idle_add
+import sys
+if sys.version_info.major == 2:
+    import gobject
+    from gobject import idle_add
+else:
+    from gi.repository import GLib as gobject
 import dbus
 import dbus.service
 import inspect
@@ -72,8 +76,8 @@ def update_i2c():
                dbusservice['i2c-temp']['/Connected'] = 1
             dbusservice['i2c-humidity']['/Status'] = 0
             dbusservice['i2c-temp']['/Status'] = 0
-	    logging.debug("values now are temperature %s, humidity %s" % (t, h))
-	    dbusservice['i2c-humidity']['/Humidity'] = h
+            logging.debug("values now are temperature %s, humidity %s" % (t, h))
+            dbusservice['i2c-humidity']['/Humidity'] = h
             dbusservice['i2c-temp']['/Temperature'] = t
 
 def update_adc():
@@ -257,7 +261,7 @@ def new_service(base, type, physical, logical, id, instance, settingId = False):
 
     # Create device type specific objects set values to empty until connected
     if settingId :
-	setting = "/Settings/" + type.capitalize() + "/" + str(settingId)
+        setting = "/Settings/" + type.capitalize() + "/" + str(settingId)
     else:
         print("no setting required")
         setting = "" 
@@ -328,7 +332,7 @@ update()
 #
 gobject.timeout_add(10000, update)
 
-print 'Connected to dbus, and switching over to gobject.MainLoop() (= event based)'
+print('Connected to dbus, and switching over to gobject.MainLoop() (= event based)')
 mainloop = gobject.MainLoop()
 mainloop.run()
 
