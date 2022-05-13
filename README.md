@@ -30,7 +30,7 @@ INSTRUCTIONS
    cp -r <your location>/dbus-i2c /opt/victronenergy/dbus-i2c
   
 3) &#35;&#35;  create a symlink from /service/dbus-i2c to /opt/victronenergy/dbus-i2c/service  
-   ###  ln -s /opt/victronenergy/dbus-i2c/service /service/dbus-i2c
+   &#35;&#35;  ln -s /opt/victronenergy/dbus-i2c/service /service/dbus-i2c
   For Venus OS 2.8 (using Python 3), this now needs to be. 
   
   mkdir /opt/victronenergy/service/dbus-i2c
@@ -56,22 +56,22 @@ You can check in the file /var/log/dbus-i2c to see what is happening as the serv
   
   For now look here and only enable the services you want.
 
-# So the only service left running is the Raspberry pi CPU temperature.
-#
-#    update_i2c()
-#    update_adc()
+&#35; So the only service left running is the Raspberry pi CPU temperature.
+&#35;
+&#35;    update_i2c()
+&#35;    update_adc()
     update_rpi()
-#    update_W1()
+&#35;    update_W1()
     return True
   
   ALSO below this line:
-# I have commented out the bits that will make new services for i2C and ADC services here
-# If you want to re-enable these you need to uncomment the right lines
+&#35; I have commented out the bits that will make new services for i2C and ADC services here
+&#35; If you want to re-enable these you need to uncomment the right lines
   
   Look for and comment out the 1-wire (unless you have one)
-# dbusservice['W1-temp']     = new_service(base, 'temperature', 'Wire',      '1Wire',  0, 28, 5)
+&#35; dbusservice['W1-temp']     = new_service(base, 'temperature', 'Wire',      '1Wire',  0, 28, 5)
   and here
-# dbusservice['W1-temp']   ['/ProductName']     = '1Wire Sensor'
+&#35; dbusservice['W1-temp']   ['/ProductName']     = '1Wire Sensor'
 
 NOTES  
 Why is it call dbus-i2c ?    = Well it started as a service to add i2c devices   
