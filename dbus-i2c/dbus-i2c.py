@@ -27,6 +27,7 @@ import logging
 import sys
 import os
 from pprint import pprint
+from w1thermsensor import W1ThermSensor
 # Import i2c interface driver, this is a modified library stored in the same directory as this file
 from i2c import AM2320 as AM2320
 
@@ -49,6 +50,7 @@ def update():
 #    update_i2c()
 #    update_adc()
     update_rpi()
+    update_W1()
     return True
 
 # update i2c interface values
@@ -136,8 +138,21 @@ def update_rpi():
         value = round(value / 1000.0, 1)
         dbusservice['cpu-temp']['/Temperature'] = value 
         fd.close
-        # added stuff here for short circuit and disconnect status
 
+#update W1 temp
+def update_W1():
+    if not os.path.exists('/sys/bus/w1/devices'):
+        if dbusservice['W1-temp']['/Connected'] != 0:
+            logging.info("W1 temperature interface disconnected")
+            dbusservice['W1-temp']['/Connected'] = 0
+    else:
+        if dbusservice['W1-temp']['/Connected'] != 1:
+            logging.info("W1 temperature interface connected")
+            dbusservice['W1-temp']['/Connected'] = 1
+        sensor = W1ThermSensor()
+        temperature_in_celsius = sensor.get_temperature()
+        value =  temperature_in_celsius
+        dbusservice['W1-temp']['/Temperature'] = value
 
 # =========================== Start of settings interface ================
 #  The settings interface handles the persistent storage of changes to settings
@@ -317,9 +332,11 @@ base = 'com.victronenergy'
 #dbusservice['adc-temp7']   ['/ProductName']     = 'Custard Pi-3 8x12bit adc'
 
 dbusservice['cpu-temp']     = new_service(base, 'temperature', 'Rpi-cpu',  'Raspberry Pi OS',  6, 29, 6)
+dbusservice['W1-temp']     = new_service(base, 'temperature', 'Wire',      '1Wire',  0, 28, 5)
+
 # Tidy up custom or missing items
 dbusservice['cpu-temp']   ['/ProductName']     = 'Raspberry Pi'
-
+dbusservice['W1-temp']   ['/ProductName']     = '1Wire Sensor'
 # Persistent settings obejects in settingsDevice will not exist before this is executed
 initSettings(newSettings)
 # Do something to read the saved settings and apply them to the objects
