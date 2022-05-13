@@ -29,7 +29,7 @@ INSTRUCTIONS
 2) Copy the dbus-i2c directory onto the VenusOS filessystem as /opt/victronenergy/dbus-i2c  
    cp -r <your location>/dbus-i2c /opt/victronenergy/dbus-i2c
   
-3) ###  create a symlink from /service/dbus-i2c to /opt/victronenergy/dbus-i2c/service  
+3) &#35;&#35;  create a symlink from /service/dbus-i2c to /opt/victronenergy/dbus-i2c/service  
    ###  ln -s /opt/victronenergy/dbus-i2c/service /service/dbus-i2c
   For Venus OS 2.8 (using Python 3), this now needs to be. 
   
