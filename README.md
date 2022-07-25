@@ -1,6 +1,7 @@
 # Victron-Service
 Temperature and Humidity d-bus services for Victron GX  
 Oh! and also now reading the Raspberry Pi CPU temperature which is why I was asked to post this !
+This has been updated for Venus 2.8x and Python 3.
 
 Now with added 1 wire support contributed by Albertbm however read the community
 Notes here regarding setting up 1-wire
@@ -10,7 +11,7 @@ https://community.victronenergy.com/questions/58792/raspberry-pi-3b-heat-tempera
 This is a service to publish temperature type data onto the DBus of VenusOs running on a Victron GX device.  
 Note: Currently this will not display the CPU temperature on Venus GX, only on RPi.
 
-I develop on a Raspberry Pi 3B+, this service was last tested on VenusOS 2.60 in November 2020.
+I develop on a Raspberry Pi 3B+, this service was last tested on VenusOS 2.87 in July 2022.
 I use these service on my Narrowboat Lady's Smock, I am based in the UK.
 
 If all goes well with the install when youstart up your GX device the service will start.
